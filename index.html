@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ማሩ ኮሚሽን | Maru Commission — ባህርዳር</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171412;
+    --cream:#F2EDE4;
+    --cream-soft:#E9E1D2;
+    --teal:#1B3A4B;
+    --teal-deep:#102733;
+    --lake:#3E7C8C;
+    --terracotta:#C76B3F;
+    --ochre:#E8A33D;
+    --line: rgba(23,20,18,0.12);
+    --line-light: rgba(255,255,255,0.18);
+    --shadow: 0 18px 50px -12px rgba(16,39,51,0.35);
+    --radius: 18px;
+    --ff-display:'Outfit','Noto Sans Ethiopic',sans-serif;
+    --ff-body:'Inter','Noto Sans Ethiopic',sans-serif;
+    --ff-mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--ff-body);
+    background:var(--cream);
+    color:var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  ::selection{background:var(--terracotta);color:#fff;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* ---- LANG TOGGLE ---- */
+  .lang-toggle{
+    display:flex;align-items:center;gap:6px;
+    background:rgba(27,58,75,0.08);
+    border:1.5px solid var(--line);
+    border-radius:100px;
+    padding:5px 8px;
+    font-family:var(--ff-mono);font-size:12px;font-weight:700;letter-spacing:1px;
+    color:var(--teal-deep);
+    transition:background .2s, border-color .2s;
+    cursor:pointer;
+    user-select:none;
+    flex-shrink:0;
+  }
+  .lang-toggle:hover{background:rgba(27,58,75,0.15);}
+  .lang-toggle .lseg{
+    padding:4px 9px;border-radius:100px;
+    transition:background .2s, color .2s;
+  }
+  .lang-toggle .lseg.active{
+    background:var(--teal);color:#fff;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(242,237,228,0.82);
+    backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);
+    transition:background .3s ease;
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1180px;margin:0 auto;
+    gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand-mark{
+    width:40px;height:40px;border-radius:11px;
+    background:linear-gradient(155deg,var(--teal),var(--lake));
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--ff-display);font-weight:800;color:var(--cream);font-size:18px;
+    box-shadow:0 6px 16px -4px rgba(27,58,75,0.5);
+    flex-shrink:0;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text .am{font-family:var(--ff-display);font-weight:700;font-size:17px;letter-spacing:0.2px;}
+  .brand-text .en{font-family:var(--ff-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--lake);font-weight:600;}
+  .nav-links{display:flex;gap:30px;align-items:center;}
+  .nav-links a{
+    font-size:14.5px;font-weight:600;color:var(--teal-deep);
+    position:relative;padding:4px 0;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--terracotta);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-right{display:flex;align-items:center;gap:10px;}
+  .nav-cta{
+    display:flex;align-items:center;gap:8px;
+    background:var(--teal);color:#fff;padding:10px 18px;border-radius:100px;
+    font-size:13.5px;font-weight:600;
+    box-shadow:0 8px 20px -6px rgba(27,58,75,0.55);
+    transition:transform .2s ease, box-shadow .2s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 26px -6px rgba(27,58,75,0.6);}
+  .nav-cta svg{width:15px;height:15px;}
+  .burger{display:none;width:42px;height:42px;align-items:center;justify-content:center;border-radius:10px;}
+  .burger svg{width:20px;height:20px;}
+
+  @media (max-width:880px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+
+  /* mobile drawer */
+  .drawer{
+    position:fixed;inset:0;background:var(--teal-deep);z-index:200;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;
+    transform:translateY(-100%);transition:transform .4s cubic-bezier(.6,0,.2,1);
+  }
+  .drawer.open{transform:translateY(0);}
+  .drawer a{color:var(--cream);font-family:var(--ff-display);font-size:26px;font-weight:600;}
+  .drawer-close{position:absolute;top:24px;right:28px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;}
+  .drawer-close svg{width:20px;height:20px;stroke:var(--cream);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;
+    display:flex;align-items:flex-end;
+    padding-top:90px;
+    overflow:hidden;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 65%;}
+  .hero-bg::after{
+    content:'';position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(16,39,51,0.15) 0%, rgba(16,39,51,0.35) 45%, rgba(16,39,51,0.92) 92%),
+      linear-gradient(100deg, rgba(16,39,51,0.55) 0%, rgba(16,39,51,0.05) 55%);
+  }
+  .hero-inner{
+    position:relative;z-index:2;width:100%;
+    max-width:1180px;margin:0 auto;padding:0 28px 80px;
+    color:var(--cream);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--ff-mono);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--ochre);font-weight:600;margin-bottom:22px;
+    border:1px solid rgba(232,163,61,0.4);padding:7px 14px;border-radius:100px;
+    background:rgba(232,163,61,0.08);
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--ochre);animation:pulse 2s infinite;flex-shrink:0;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+  .hero h1{
+    font-family:var(--ff-display);font-weight:800;
+    font-size:clamp(38px,6vw,76px);line-height:1.04;letter-spacing:-1px;
+    max-width:820px;
+  }
+  .hero h1 .accent{color:var(--ochre);font-style:normal;}
+  .hero p.lead{
+    margin-top:22px;font-size:clamp(15px,1.6vw,19px);line-height:1.65;
+    max-width:560px;color:rgba(242,237,228,0.88);font-weight:400;
+  }
+  .hero-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:15px 26px;border-radius:100px;font-weight:600;font-size:14.5px;
+    transition:transform .22s ease, box-shadow .22s ease, background .22s ease;
+  }
+  .btn svg{width:17px;height:17px;}
+  .btn-primary{
+    background:var(--terracotta);color:#fff;
+    box-shadow:0 10px 28px -8px rgba(199,107,63,0.65);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 34px -8px rgba(199,107,63,0.75);}
+  .btn-ghost{
+    background:rgba(242,237,228,0.1);color:var(--cream);
+    border:1.5px solid rgba(242,237,228,0.35);
+    backdrop-filter:blur(6px);
+  }
+  .btn-ghost:hover{background:rgba(242,237,228,0.18);transform:translateY(-3px);}
+
+  .hero-stats{
+    display:flex;gap:36px;margin-top:56px;flex-wrap:wrap;
+    border-top:1px solid rgba(242,237,228,0.18);padding-top:28px;
+  }
+  .stat .num{font-family:var(--ff-display);font-size:30px;font-weight:700;color:var(--cream);}
+  .stat .label{font-family:var(--ff-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(242,237,228,0.6);margin-top:4px;}
+
+  .scroll-cue{
+    position:absolute;bottom:28px;right:28px;z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:rgba(242,237,228,0.7);font-family:var(--ff-mono);font-size:10px;letter-spacing:2px;
+  }
+  .scroll-cue .line{width:1px;height:34px;background:rgba(242,237,228,0.4);position:relative;overflow:hidden;}
+  .scroll-cue .line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--ochre);animation:scrolldown 1.8s infinite;}
+  @keyframes scrolldown{0%{top:-100%;}100%{top:100%;}}
+
+  @media (max-width:600px){
+    .hero-stats{gap:24px;}
+    .scroll-cue{display:none;}
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:100px 0;}
+  .sec-head{margin-bottom:54px;max-width:680px;}
+  .sec-head .tag{
+    font-family:var(--ff-mono);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--terracotta);font-weight:600;margin-bottom:14px;display:block;
+  }
+  .sec-head h2{
+    font-family:var(--ff-display);font-weight:700;font-size:clamp(28px,4vw,44px);
+    letter-spacing:-0.5px;line-height:1.12;color:var(--teal-deep);
+  }
+  .sec-head p{margin-top:16px;font-size:16px;line-height:1.7;color:#54504a;}
+
+  /* ---------- SERVICES MARQUEE ---------- */
+  .services-band{
+    background:var(--teal-deep);color:var(--cream);padding:0;overflow:hidden;
+    border-top:1px solid rgba(242,237,228,0.1);border-bottom:1px solid rgba(242,237,228,0.1);
+  }
+  .marquee{display:flex;white-space:nowrap;padding:22px 0;}
+  .marquee-track{display:flex;gap:0;animation:scroll 32s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marquee-item{
+    display:flex;align-items:center;gap:14px;padding:0 32px;
+    font-family:var(--ff-display);font-size:20px;font-weight:600;color:rgba(242,237,228,0.92);
+    border-right:1px solid rgba(242,237,228,0.15);
+  }
+  .marquee-item svg{width:16px;height:16px;color:var(--ochre);flex-shrink:0;}
+
+  /* ---------- SERVICE GRID ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media (max-width:980px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.services-grid{grid-template-columns:1fr;}}
+  .svc-card{
+    background:#fff;border-radius:var(--radius);padding:30px 26px;
+    border:1px solid var(--line);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    position:relative;overflow:hidden;
+  }
+  .svc-card::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--terracotta),var(--ochre));
+    transform:scaleX(0);transform-origin:left;transition:transform .35s ease;
+  }
+  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent;}
+  .svc-card:hover::before{transform:scaleX(1);}
+  .svc-icon{
+    width:52px;height:52px;border-radius:14px;
+    background:var(--cream-soft);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .svc-icon svg{width:25px;height:25px;color:var(--teal);}
+  .svc-card h3{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--teal-deep);margin-bottom:9px;}
+  .svc-card p{font-size:14px;line-height:1.6;color:#666057;}
+
+  /* ---------- PROPERTIES ---------- */
+  .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
+  .filter-btn{
+    padding:10px 20px;border-radius:100px;font-size:13.5px;font-weight:600;
+    border:1.5px solid var(--line);background:#fff;color:var(--teal-deep);
+    transition:all .2s ease;
+  }
+  .filter-btn:hover{border-color:var(--teal);}
+  .filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+  .prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:980px){.prop-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.prop-grid{grid-template-columns:1fr;}}
+
+  .prop-card{
+    background:#fff;border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line);
+    transition:transform .3s ease, box-shadow .3s ease;
+    cursor:pointer;
+    display:flex;flex-direction:column;
+  }
+  .prop-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+  .prop-card.hidden{display:none;}
+  .prop-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--cream-soft);}
+  .prop-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .prop-card:hover .prop-img img{transform:scale(1.07);}
+  .prop-badge{
+    position:absolute;top:14px;left:14px;
+    background:rgba(16,39,51,0.85);color:var(--cream);backdrop-filter:blur(4px);
+    font-family:var(--ff-mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;
+    padding:6px 12px;border-radius:100px;font-weight:600;
+  }
+  .prop-badge.status-ready{background:rgba(62,124,140,0.9);}
+  .prop-badge.status-build{background:rgba(199,107,63,0.9);}
+  .prop-badge.status-plan{background:rgba(232,163,61,0.92);color:var(--teal-deep);}
+  .prop-loc{
+    position:absolute;bottom:14px;left:14px;display:flex;align-items:center;gap:6px;
+    color:#fff;font-size:12.5px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,0.5);
+  }
+  .prop-loc svg{width:13px;height:13px;}
+  .prop-body{padding:22px;flex:1;display:flex;flex-direction:column;}
+  .prop-body h3{font-family:var(--ff-display);font-size:17px;font-weight:700;color:var(--teal-deep);margin-bottom:8px;}
+  .prop-body p{font-size:13.5px;color:#6b665d;line-height:1.55;flex:1;}
+  .prop-foot{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+  }
+  .prop-type{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.5px;text-transform:uppercase;color:var(--lake);font-weight:600;}
+  .prop-arrow{
+    width:34px;height:34px;border-radius:50%;background:var(--cream-soft);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .prop-card:hover .prop-arrow{background:var(--terracotta);transform:rotate(45deg);}
+  .prop-arrow svg{width:14px;height:14px;color:var(--teal-deep);transition:color .2s ease;}
+  .prop-card:hover .prop-arrow svg{color:#fff;}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed;inset:0;z-index:300;background:rgba(10,18,22,0.94);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .3s ease;
+    padding:24px;
+  }
+  .lightbox.open{opacity:1;visibility:visible;}
+  .lightbox-inner{max-width:920px;width:100%;}
+  .lightbox-inner img{width:100%;max-height:72vh;object-fit:contain;border-radius:12px;}
+  .lightbox-cap{color:var(--cream);margin-top:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
+  .lightbox-cap h4{font-family:var(--ff-display);font-size:20px;font-weight:700;margin-bottom:6px;}
+  .lightbox-cap p{font-size:13.5px;color:rgba(242,237,228,0.7);max-width:520px;line-height:1.6;}
+  .lightbox-close{
+    position:absolute;top:28px;right:28px;width:46px;height:46px;border-radius:50%;
+    background:rgba(242,237,228,0.1);display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(242,237,228,0.2);
+  }
+  .lightbox-close svg{width:18px;height:18px;stroke:var(--cream);}
+  .lightbox-cta{
+    display:inline-flex;align-items:center;gap:8px;background:var(--terracotta);color:#fff;
+    padding:11px 20px;border-radius:100px;font-size:13.5px;font-weight:600;white-space:nowrap;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--teal-deep);color:var(--cream);position:relative;overflow:hidden;}
+  .about::before{
+    content:'';position:absolute;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle, rgba(232,163,61,0.12), transparent 70%);
+    top:-200px;right:-200px;
+  }
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1;}
+  @media (max-width:880px){.about-grid{grid-template-columns:1fr;gap:40px;}}
+  .about .sec-head .tag{color:var(--ochre);}
+  .about .sec-head h2{color:var(--cream);}
+  .about-body p{font-size:16px;line-height:1.75;color:rgba(242,237,228,0.78);margin-top:18px;}
+  .about-body p:first-child{margin-top:0;}
+  .trust-list{display:flex;flex-direction:column;gap:18px;margin-top:30px;}
+  .trust-item{display:flex;gap:14px;align-items:flex-start;}
+  .trust-item .ic{
+    width:38px;height:38px;border-radius:10px;background:rgba(232,163,61,0.15);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .trust-item .ic svg{width:18px;height:18px;color:var(--ochre);}
+  .trust-item h4{font-size:15px;font-weight:700;margin-bottom:3px;}
+  .trust-item p{font-size:13.5px;color:rgba(242,237,228,0.65);line-height:1.5;}
+
+  .about-visual{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:3/4;box-shadow:var(--shadow);}
+  .about-visual img{width:100%;height:100%;object-fit:cover;}
+  .about-visual .float-card{
+    position:absolute;bottom:20px;left:20px;right:20px;
+    background:rgba(16,39,51,0.85);backdrop-filter:blur(10px);
+    border-radius:14px;padding:18px 20px;border:1px solid rgba(242,237,228,0.15);
+  }
+  .float-card .row{display:flex;justify-content:space-between;align-items:center;}
+  .float-card .row + .row{margin-top:10px;padding-top:10px;border-top:1px solid rgba(242,237,228,0.1);}
+  .float-card .k{font-size:12.5px;color:rgba(242,237,228,0.6);}
+  .float-card .v{font-family:var(--ff-display);font-size:14.5px;font-weight:700;color:var(--cream);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--cream-soft);position:relative;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;}
+  @media (max-width:880px){.contact-grid{grid-template-columns:1fr;}}
+
+  .pin-map{
+    position:relative;background:var(--teal-deep);border-radius:24px;overflow:hidden;
+    min-height:420px;display:flex;align-items:center;justify-content:center;
+  }
+  .pin-map svg.grid-lines{position:absolute;inset:0;opacity:0.15;}
+  .pin-core{position:relative;display:flex;flex-direction:column;align-items:center;z-index:2;}
+  .pin-pulse{
+    width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,163,61,0.35),transparent 70%);
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    animation:pinpulse 2.4s infinite;
+  }
+  @keyframes pinpulse{0%{transform:translate(-50%,-50%) scale(0.6);opacity:0.8;}100%{transform:translate(-50%,-50%) scale(2.6);opacity:0;}}
+  .pin-icon{
+    width:64px;height:64px;border-radius:50%;background:var(--terracotta);
+    display:flex;align-items:center;justify-content:center;position:relative;z-index:3;
+    box-shadow:0 0 0 8px rgba(199,107,63,0.18);
+  }
+  .pin-icon svg{width:30px;height:30px;color:#fff;}
+  .pin-label{margin-top:22px;text-align:center;color:var(--cream);position:relative;z-index:3;}
+  .pin-label .city{font-family:var(--ff-display);font-size:22px;font-weight:700;}
+  .pin-label .sub{font-family:var(--ff-mono);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(242,237,228,0.55);margin-top:6px;}
+  .orbit-tag{
+    position:absolute;background:rgba(242,237,228,0.08);border:1px solid rgba(242,237,228,0.18);
+    backdrop-filter:blur(6px);padding:8px 14px;border-radius:100px;
+    font-family:var(--ff-mono);font-size:11px;color:rgba(242,237,228,0.8);letter-spacing:0.5px;
+    animation:float 5s ease-in-out infinite;
+  }
+  .orbit-tag.t1{top:14%;left:10%;animation-delay:0s;}
+  .orbit-tag.t2{top:22%;right:8%;animation-delay:1.2s;}
+  .orbit-tag.t3{bottom:16%;left:8%;animation-delay:2.4s;}
+  .orbit-tag.t4{bottom:24%;right:10%;animation-delay:0.6s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @media (max-width:560px){.orbit-tag{font-size:9.5px;padding:6px 10px;}}
+
+  .channels{display:flex;flex-direction:column;gap:14px;}
+  .channel-row{display:flex;gap:14px;}
+  @media (max-width:560px){.channel-row{flex-direction:column;}}
+  .ch-card{
+    flex:1;background:#fff;border-radius:16px;padding:20px;border:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .ch-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .ch-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .ch-ic svg{width:22px;height:22px;}
+  .ch-ic.phone{background:rgba(27,58,75,0.1);}
+  .ch-ic.phone svg{color:var(--teal);}
+  .ch-ic.tg{background:rgba(62,124,140,0.12);}
+  .ch-ic.tg svg{color:var(--lake);}
+  .ch-ic.wa{background:rgba(199,107,63,0.12);}
+  .ch-ic.wa svg{color:var(--terracotta);}
+  .ch-ic.fb{background:rgba(27,58,75,0.1);}
+  .ch-ic.fb svg{color:var(--teal);}
+  .ch-ic.tt{background:rgba(23,20,18,0.08);}
+  .ch-ic.tt svg{color:var(--ink);}
+  .ch-info .label{font-size:11px;font-family:var(--ff-mono);letter-spacing:1px;text-transform:uppercase;color:#8a8478;}
+  .ch-info .value{font-weight:700;font-size:15px;color:var(--teal-deep);margin-top:2px;}
+
+  .call-strip{margin-top:8px;display:flex;gap:14px;flex-wrap:wrap;}
+  .call-strip .btn-primary, .call-strip .btn-outline{flex:1;justify-content:center;min-width:160px;}
+  .btn-outline{border:1.5px solid var(--teal);color:var(--teal);background:transparent;}
+  .btn-outline:hover{background:var(--teal);color:#fff;transform:translateY(-3px);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--teal-deep);color:rgba(242,237,228,0.6);padding:50px 0 28px;}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:30px;}
+  .foot-brand{display:flex;align-items:center;gap:11px;}
+  .foot-brand .brand-text .am{color:var(--cream);}
+  .foot-links{display:flex;gap:28px;flex-wrap:wrap;}
+  .foot-links a{font-size:13.5px;font-weight:600;color:rgba(242,237,228,0.7);}
+  .foot-links a:hover{color:var(--ochre);}
+  .foot-bottom{
+    margin-top:36px;padding-top:22px;border-top:1px solid rgba(242,237,228,0.1);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;
+  }
+
+  .mobile-call{
+    position:fixed;bottom:0;left:0;right:0;z-index:150;
+    background:var(--teal-deep);display:none;
+    padding:12px 16px;gap:10px;
+    box-shadow:0 -8px 24px rgba(0,0,0,0.25);
+  }
+  @media (max-width:880px){.mobile-call{display:flex;}}
+  .mobile-call a{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px;border-radius:12px;font-weight:700;font-size:13.5px;
+  }
+  .mobile-call a.call{background:var(--terracotta);color:#fff;}
+  .mobile-call a.tg{background:rgba(242,237,228,0.1);color:var(--cream);border:1px solid rgba(242,237,228,0.2);}
+  .mobile-call svg{width:16px;height:16px;}
+  @media (max-width:880px){body{padding-bottom:78px;}}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* lang transition */
+  [data-i18n]{transition:opacity .18s ease;}
+  body.lang-switching [data-i18n]{opacity:0;}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark">ማ</div>
+      <div class="brand-text">
+        <span class="am">ማሩ ኮሚሽን</span>
+        <span class="en">Maru Commission · Bahir Dar</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#services" data-i18n="nav.services">አገልግሎቶች</a>
+      <a href="#properties" data-i18n="nav.properties">ንብረቶች</a>
+      <a href="#about" data-i18n="nav.about">ስለ እኛ</a>
+      <a href="#contact" data-i18n="nav.contact">አግኙን</a>
+    </div>
+    <div class="nav-right">
+      <!-- Language Toggle -->
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="lseg active" id="segAM">አማ</span>
+        <span class="lseg" id="segEN">EN</span>
+      </button>
+      <a href="tel:+251924510214" class="nav-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-i18n="nav.call">ይደውሉ</span>
+      </a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1B3A4B" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="drawer" id="drawer">
+  <button class="drawer-close" id="drawerClose"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <a href="#services" class="dlink" data-i18n="nav.services">አገልግሎቶች</a>
+  <a href="#properties" class="dlink" data-i18n="nav.properties">ንብረቶች</a>
+  <a href="#about" class="dlink" data-i18n="nav.about">ስለ እኛ</a>
+  <a href="#contact" class="dlink" data-i18n="nav.contact">አግኙን</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg"><img id="heroImg" src="static/img/12.jpeg" alt="Bahir Dar skyline near Lake Tana"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">ባህርዳር · የንብረት ወኪል እና ፕሮሞሽን</span></div>
+    <h1 data-i18n="hero.h1">ካሉበት ቦታ ሆነው፣<br>የሚፈልጉትን <span class="accent">ንብረት</span> እናደርስዎታለን።</h1>
+    <p class="lead" data-i18n="hero.lead">ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን — ባዶ ቦታ፣ ቤት፣ ኮንዶሚኒየም፣ አፓርታማ፣ የንግድ ቦታ እና መኪና ሽያጭና ግዢ መረጃዎችን በባህርዳር ከተማ በቅርበት እናቀርብልዎታለን።</p>
+    <div class="hero-actions">
+      <a href="#properties" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span data-i18n="hero.cta1">ንብረቶቻችንን ይመልከቱ</span>
+      </a>
+      <a href="https://t.me/maruagent21" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.05 2.46c-.3-.26-.74-.33-1.24-.16L2.6 9.27c-.97.37-.96 1.78.02 2.04l4.6 1.36 1.79 5.6c.16.5.55.78 1.01.78.32 0 .62-.13.84-.39l2.55-2.96 4.7 3.46c.22.16.47.24.72.24.2 0 .4-.05.58-.16.36-.21.6-.59.65-1.02l2.6-15.1c.07-.5-.12-.94-.61-1.18z"/></svg>
+        <span data-i18n="hero.cta2">በቴሌግራም ያውሩን</span>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">12+</div><div class="label" data-i18n="stat.projects">ፕሮጀክቶች</div></div>
+      <div class="stat"><div class="num">6</div><div class="label" data-i18n="stat.categories">የንብረት ምድቦች</div></div>
+      <div class="stat"><div class="num" data-i18n="stat.city">ባህርዳር</div><div class="label" data-i18n="stat.coverage">አካባቢ ሽፋን</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="label" data-i18n="stat.tg">በቴሌግራም ምላሽ</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+</section>
+
+<!-- ===== SERVICES MARQUEE ===== -->
+<div class="services-band">
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</div>
+
+<!-- ===== SERVICES GRID ===== -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">SERVICES · <span data-i18n="nav.services">አገልግሎቶች</span></span>
+      <h2 data-i18n="services.h2">ከመረጡት ቦታ ሆነው የሚፈልጉትን እንዲያገኙ እናደርጋለን</h2>
+      <p data-i18n="services.p">በባህርዳር ከተማ ውስጥ ካለው እያንዳንዱ የንብረት ዓይነት — መረጃ፣ ድርድር እና ትክክለኛ ግንኙነት እናቀርባለን።</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== PROPERTIES ===== -->
+<section id="properties" style="background:var(--cream-soft);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">PORTFOLIO · <span data-i18n="nav.properties">ንብረቶች</span></span>
+      <h2 data-i18n="props.h2">በባህርዳር የተመረጡ ህንፃዎችና ፕሮጀክቶች</h2>
+      <p data-i18n="props.p">ከመሰረት እስከ ፍጻሜ — በተለያየ ደረጃ ላይ ያሉ የመኖሪያና የንግድ ህንፃዎችን ይዘን ቀርበናል። ማጣራት ይምረጡ ወይም ሁሉንም ይዳስሱ።</p>
+    </div>
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="prop-grid" id="propGrid"></div>
+  </div>
+</section>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-cap">
+      <div>
+        <h4 id="lightboxTitle"></h4>
+        <p id="lightboxDesc"></p>
+      </div>
+      <a href="tel:+251924510214" class="lightbox-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-i18n="lightbox.cta">ይጠይቁ</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <span class="tag" style="display:block;">ABOUT · <span data-i18n="nav.about">ስለ እኛ</span></span>
+        <h2 style="font-family:var(--ff-display);font-weight:700;font-size:clamp(28px,4vw,40px);letter-spacing:-0.5px;line-height:1.15;margin-top:14px;" data-i18n="about.h2">በባህርዳር የንብረት ግብይትን ቀላል እናደርጋለን</h2>
+        <p data-i18n="about.p1">ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን በባህርዳር ከተማ የተመሰረተ የንብረት ወኪል ድርጅት ነው። ስራችን ባዶ ቦታ፣ ቤት፣ ኮንዶሚኒየም፣ አፓርታማ፣ የንግድ ቦታ እና መኪና ሽያጭና ግዢ ላይ የተሰማራ ነው።</p>
+        <p data-i18n="about.p2">ደንበኞቻችን ካሉበት ቦታ ሆነው — በስልክ፣ በቴሌግራም፣ በፌስቡክ ወይም በዋትስአፕ — ትክክለኛ መረጃ እና ፍጥነት ያለው ምላሽ እንዲያገኙ እንሰራለን።</p>
+        <div class="trust-list">
+          <div class="trust-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div><h4 data-i18n="trust.fast.h">ፈጣን ምላሽ</h4><p data-i18n="trust.fast.p">በቴሌግራም እና ስልክ በፍጥነት እንመላለሳለን</p></div>
+          </div>
+          <div class="trust-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg></div>
+            <div><h4 data-i18n="trust.verified.h">የተረጋገጡ ህንፃዎች</h4><p data-i18n="trust.verified.p">በቦታ ላይ ተገኝተን የተረጋገጡ ፕሮጀክቶች ብቻ</p></div>
+          </div>
+          <div class="trust-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><h4 data-i18n="trust.local.h">የቦታ ብቃት</h4><p data-i18n="trust.local.p">በባህርዳር ከተማ ውስጥ ያለ እያንዳንዱ ክፍለ ከተማ ሽፋን</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <img id="aboutImg" src="static/img/9.jpeg" alt="Bahir Dar aerial view">
+        <div class="float-card">
+          <div class="row"><span class="k" data-i18n="about.card.city.k">ከተማ</span><span class="v" data-i18n="about.card.city.v">ባህርዳር, ኢትዮጵያ</span></div>
+          <div class="row"><span class="k" data-i18n="about.card.area.k">አካባቢ</span><span class="v" data-i18n="about.card.area.v">በጣና ሐይቅ አካባቢ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">CONTACT · <span data-i18n="nav.contact">አግኙን</span></span>
+      <h2 data-i18n="contact.h2">ካሉበት ቦታ ሆነው ያውሩን</h2>
+      <p data-i18n="contact.p">በሚፈልጉት መንገድ ይደውሉ ወይም ይጻፉ — ስልክ፣ ቴሌግራም፣ ዋትስአፕ፣ ፌስቡክ ወይም ቲክቶክ።</p>
+    </div>
+    <div class="contact-grid">
+      <div class="pin-map reveal">
+        <svg class="grid-lines" viewBox="0 0 400 400" preserveAspectRatio="none">
+          <defs><pattern id="gridpat" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#F2EDE4" stroke-width="0.5"/></pattern></defs>
+          <rect width="400" height="400" fill="url(#gridpat)"/>
+        </svg>
+        <div class="orbit-tag t1" data-i18n="orbit.house">ቤት</div>
+        <div class="orbit-tag t2" data-i18n="orbit.condo">ኮንዶሚኒየም</div>
+        <div class="orbit-tag t3" data-i18n="orbit.commercial">የንግድ ቦታ</div>
+        <div class="orbit-tag t4" data-i18n="orbit.car">መኪና</div>
+        <div class="pin-core">
+          <div class="pin-pulse"></div>
+          <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="pin-label">
+            <div class="city" data-i18n="pin.city">ባህርዳር</div>
+            <div class="sub">Bahir Dar, Ethiopia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="channels reveal">
+        <div class="channel-row">
+          <a class="ch-card" href="tel:+251924510214">
+            <div class="ch-ic phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="ch-info"><div class="label">Phone 1</div><div class="value" dir="ltr">+251 92 451 0214</div></div>
+          </a>
+          <a class="ch-card" href="tel:+251970719404">
+            <div class="ch-ic phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="ch-info"><div class="label">Phone 2</div><div class="value" dir="ltr">+251 97 071 9404</div></div>
+          </a>
+        </div>
+        <div class="channel-row">
+          <a class="ch-card" href="https://t.me/maruagent21" target="_blank" rel="noopener">
+            <div class="ch-ic tg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.05 2.46c-.3-.26-.74-.33-1.24-.16L2.6 9.27c-.97.37-.96 1.78.02 2.04l4.6 1.36 1.79 5.6c.16.5.55.78 1.01.78.32 0 .62-.13.84-.39l2.55-2.96 4.7 3.46c.22.16.47.24.72.24.2 0 .4-.05.58-.16.36-.21.6-.59.65-1.02l2.6-15.1c.07-.5-.12-.94-.61-1.18z"/></svg></div>
+            <div class="ch-info"><div class="label">Telegram</div><div class="value">@maruagent21</div></div>
+          </a>
+          <a class="ch-card" href="https://chat.whatsapp.com/C7U5zZP2MtE3vSl6xa6na5" target="_blank" rel="noopener">
+            <div class="ch-ic wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.04 3.5a8.94 8.94 0 0 0-8.93 8.94c0 1.58.42 3.12 1.21 4.47L3 21.5l4.7-1.23a8.91 8.91 0 0 0 4.33 1.1h.01a8.94 8.94 0 0 0 8.93-8.94 8.88 8.88 0 0 0-3.37-6.11zM12.04 19.7a7.4 7.4 0 0 1-3.78-1.04l-.27-.16-2.79.73.74-2.72-.18-.28a7.4 7.4 0 0 1-1.14-3.94 7.43 7.43 0 0 1 7.42-7.43c1.98 0 3.84.77 5.24 2.18a7.36 7.36 0 0 1 2.18 5.25 7.43 7.43 0 0 1-7.42 7.41z"/></svg></div>
+            <div class="ch-info"><div class="label">WhatsApp</div><div class="value" data-i18n="wa.join">ቡድን ይቀላቀሉ</div></div>
+          </a>
+        </div>
+        <div class="channel-row">
+          <a class="ch-card" href="https://www.facebook.com/mamaru.mulat.386518" target="_blank" rel="noopener">
+            <div class="ch-ic fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></div>
+            <div class="ch-info"><div class="label">Facebook</div><div class="value">mamaru.mulat</div></div>
+          </a>
+          <a class="ch-card" href="https://www.tiktok.com/@mamaru.mulat" target="_blank" rel="noopener">
+            <div class="ch-ic tt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-.66-.04 4.4 4.4 0 0 1-3.5-4.36V1h-3.6v13.93a2.5 2.5 0 1 1-1.77-2.39V9.07a6.1 6.1 0 1 0 5.37 6.06V8.4a7.93 7.93 0 0 0 4.16 1.18V6.0a4.28 4.28 0 0 1-0-.18z"/></svg></div>
+            <div class="ch-info"><div class="label">TikTok</div><div class="value">@mamaru.mulat</div></div>
+          </a>
+        </div>
+        <div class="call-strip">
+          <a href="tel:+251924510214" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-i18n="contact.callnow">አሁን ይደውሉ</span>
+          </a>
+          <a href="https://t.me/maruagent21" target="_blank" rel="noopener" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M22.05 2.46c-.3-.26-.74-.33-1.24-.16L2.6 9.27c-.97.37-.96 1.78.02 2.04l4.6 1.36 1.79 5.6c.16.5.55.78 1.01.78.32 0 .62-.13.84-.39l2.55-2.96 4.7 3.46c.22.16.47.24.72.24.2 0 .4-.05.58-.16.36-.21.6-.59.65-1.02l2.6-15.1c.07-.5-.12-.94-.61-1.18z"/></svg>
+            <span data-i18n="contact.tgmsg">በቴሌግራም መልዕክት ይላኩ</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand-mark">ማ</div>
+        <div class="brand-text">
+          <span class="am">ማሩ ኮሚሽን</span>
+          <span class="en" style="color:rgba(242,237,228,0.5);">Agent &amp; Promotion</span>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="#services" data-i18n="nav.services">አገልግሎቶች</a>
+        <a href="#properties" data-i18n="nav.properties">ንብረቶች</a>
+        <a href="#about" data-i18n="nav.about">ስለ እኛ</a>
+        <a href="#contact" data-i18n="nav.contact">አግኙን</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="footer.copy">© 2026 ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን — ባህርዳር</span>
+      <span dir="ltr">+251 92 451 0214 · +251 97 071 9404</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== MOBILE CALL BAR ===== -->
+<div class="mobile-call">
+  <a href="tel:+251924510214" class="call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span data-i18n="nav.call">ይደውሉ</span>
+  </a>
+  <a href="https://t.me/maruagent21" target="_blank" rel="noopener" class="tg">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.05 2.46c-.3-.26-.74-.33-1.24-.16L2.6 9.27c-.97.37-.96 1.78.02 2.04l4.6 1.36 1.79 5.6c.16.5.55.78 1.01.78.32 0 .62-.13.84-.39l2.55-2.96 4.7 3.46c.22.16.47.24.72.24.2 0 .4-.05.58-.16.36-.21.6-.59.65-1.02l2.6-15.1c.07-.5-.12-.94-.61-1.18z"/></svg>
+    <span data-i18n="mobile.tg">ቴሌግራም</span>
+  </a>
+</div>
+
+<!-- ================================================================
+     JAVASCRIPT
+     ================================================================ -->
+<script>
+/* =====================================================
+   1. IMAGE PATHS — relative to project root
+   Each key maps to static/img/{key}.jpeg
+   ===================================================== */
+const IMG = {};
+[1,3,5,7,9,12,14,17,19,20,21].forEach(k => {
+  IMG[String(k)] = `static/img/${k}.jpeg`;
+});
+
+/* =====================================================
+   2. TRANSLATIONS — AM (Amharic) & EN (English)
+   ===================================================== */
+const TRANSLATIONS = {
+  am: {
+    'nav.services':      'አገልግሎቶች',
+    'nav.properties':    'ንብረቶች',
+    'nav.about':         'ስለ እኛ',
+    'nav.contact':       'አግኙን',
+    'nav.call':          'ይደውሉ',
+    'hero.eyebrow':      'ባህርዳር · የንብረት ወኪል እና ፕሮሞሽን',
+    'hero.h1':           'ካሉበት ቦታ ሆነው፣<br>የሚፈልጉትን <span class="accent">ንብረት</span> እናደርስዎታለን።',
+    'hero.lead':         'ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን — ባዶ ቦታ፣ ቤት፣ ኮንዶሚኒየም፣ አፓርታማ፣ የንግድ ቦታ እና መኪና ሽያጭና ግዢ መረጃዎችን በባህርዳር ከተማ በቅርበት እናቀርብልዎታለን።',
+    'hero.cta1':         'ንብረቶቻችንን ይመልከቱ',
+    'hero.cta2':         'በቴሌግራም ያውሩን',
+    'stat.projects':     'ፕሮጀክቶች',
+    'stat.categories':   'የንብረት ምድቦች',
+    'stat.city':         'ባህርዳር',
+    'stat.coverage':     'አካባቢ ሽፋን',
+    'stat.tg':           'በቴሌግራም ምላሽ',
+    'services.h2':       'ከመረጡት ቦታ ሆነው የሚፈልጉትን እንዲያገኙ እናደርጋለን',
+    'services.p':        'በባህርዳር ከተማ ውስጥ ካለው እያንዳንዱ የንብረት ዓይነት — መረጃ፣ ድርድር እና ትክክለኛ ግንኙነት እናቀርባለን።',
+    'props.h2':          'በባህርዳር የተመረጡ ህንፃዎችና ፕሮጀክቶች',
+    'props.p':           'ከመሰረት እስከ ፍጻሜ — በተለያየ ደረጃ ላይ ያሉ የመኖሪያና የንግድ ህንፃዎችን ይዘን ቀርበናል። ማጣራት ይምረጡ ወይም ሁሉንም ይዳስሱ።',
+    'filter.all':        'ሁሉም',
+    'filter.ready':      'ተጠናቅቋል',
+    'filter.build':      'በግንባታ ላይ',
+    'filter.plan':       'ፕላን/ፕሮጀክት',
+    'filter.view':       'አካባቢ እይታ',
+    'lightbox.cta':      'ይጠይቁ',
+    'about.h2':          'በባህርዳር የንብረት ግብይትን ቀላል እናደርጋለን',
+    'about.p1':          'ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን በባህርዳር ከተማ የተመሰረተ የንብረት ወኪል ድርጅት ነው። ስራችን ባዶ ቦታ፣ ቤት፣ ኮንዶሚኒየም፣ አፓርታማ፣ የንግድ ቦታ እና መኪና ሽያጭና ግዢ ላይ የተሰማራ ነው።',
+    'about.p2':          'ደንበኞቻችን ካሉበት ቦታ ሆነው — በስልክ፣ በቴሌግራም፣ በፌስቡክ ወይም በዋትስአፕ — ትክክለኛ መረጃ እና ፍጥነት ያለው ምላሽ እንዲያገኙ እንሰራለን።',
+    'trust.fast.h':      'ፈጣን ምላሽ',
+    'trust.fast.p':      'በቴሌግራም እና ስልክ በፍጥነት እንመላለሳለን',
+    'trust.verified.h':  'የተረጋገጡ ህንፃዎች',
+    'trust.verified.p':  'በቦታ ላይ ተገኝተን የተረጋገጡ ፕሮጀክቶች ብቻ',
+    'trust.local.h':     'የቦታ ብቃት',
+    'trust.local.p':     'በባህርዳር ከተማ ውስጥ ያለ እያንዳንዱ ክፍለ ከተማ ሽፋን',
+    'about.card.city.k': 'ከተማ',
+    'about.card.city.v': 'ባህርዳር, ኢትዮጵያ',
+    'about.card.area.k': 'አካባቢ',
+    'about.card.area.v': 'በጣና ሐይቅ አካባቢ',
+    'contact.h2':        'ካሉበት ቦታ ሆነው ያውሩን',
+    'contact.p':         'በሚፈልጉት መንገድ ይደውሉ ወይም ይጻፉ — ስልክ፣ ቴሌግራም፣ ዋትስአፕ፣ ፌስቡክ ወይም ቲክቶክ።',
+    'orbit.house':       'ቤት',
+    'orbit.condo':       'ኮንዶሚኒየም',
+    'orbit.commercial':  'የንግድ ቦታ',
+    'orbit.car':         'መኪና',
+    'pin.city':          'ባህርዳር',
+    'wa.join':           'ቡድን ይቀላቀሉ',
+    'contact.callnow':   'አሁን ይደውሉ',
+    'contact.tgmsg':     'በቴሌግራም መልዕክት ይላኩ',
+    'mobile.tg':         'ቴሌግራም',
+    'footer.copy':       '© 2026 ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን — ባህርዳር',
+    /* service cards */
+    'svc.house.title':   'ቤት ሽያጭና ግዢ',
+    'svc.house.desc':    'ለመኖሪያ ተስማሚ ቤቶችን ለመሸጥ ወይም ለመግዛት ትክክለኛ መረጃ እና ድርድር ድጋፍ።',
+    'svc.condo.title':   'ኮንዶሚኒየም',
+    'svc.condo.desc':    'በከተማ ውስጥ ያሉ የኮንዶሚኒየም ክፍሎችን ለመግዛት ወይም ለማከራየት እናገናኝዎታለን።',
+    'svc.apt.title':     'አፓርታማ',
+    'svc.apt.desc':      'ከትንሽ እስከ ትልቅ ፕሮጀክቶች ድረስ የተለያዩ የአፓርታማ አማራጮችን እናቀርባለን።',
+    'svc.land.title':    'ባዶ ቦታ',
+    'svc.land.desc':     'ለግንባታ ዝግጁ የሆኑ ባዶ ቦታዎችን ህጋዊ መረጃ ጭምር በማቅረብ እንደግፋለን።',
+    'svc.comm.title':    'የንግድ ቦታ',
+    'svc.comm.desc':     'ለድርጅት፣ ሱቅ ወይም መጋዘን የሚሆኑ የንግድ ቦታዎችን እንለያለን።',
+    'svc.car.title':     'መኪና ሽያጭ',
+    'svc.car.desc':      'የመኪና ሽያጭና ግዢ መረጃዎችን በማስተናገድ ትክክለኛ ግንኙነት እንፈጥራለን።',
+    'svc.loc.title':     'የቦታ ጥናት',
+    'svc.loc.desc':      'ካሉበት ቦታ ሆነው የምትፈልጉትን አካባቢ መረጃ እና ምስል እናደርስዎታለን።',
+    'svc.ver.title':     'ድርድርና ማረጋገጫ',
+    'svc.ver.desc':      'ከንብረት ባለቤት እና ገዢ መካከል ግልጽና ታማኝ ድርድር እንመቻቻለን።',
+    /* property entries */
+    'p9.title':   'ብዙ ፎቅ አፓርታማ — ዋና መንገድ',
+    'p9.loc':     'ባህርዳር ዋና መንገድ',
+    'p9.desc':    'ለመኖሪያና ለንግድ የተመቸ፣ ከመንገድ ቀጥታ ታይነት ያለው ባለብዙ ፎቅ የመኖሪያ/ንግድ ህንፃ።',
+    'p9.status':  'ተጠናቅቋል',
+    'p3.title':   'የንግድና መኖሪያ ድብልቅ ህንፃ',
+    'p3.loc':     'ባህርዳር ከተማ',
+    'p3.desc':    'በምድር ላይ የንግድ ሱቆችን እና በላይ ፎቆች ላይ የመኖሪያ ክፍሎችን የያዘ ህንፃ፣ ሰፊ ባልኮኒዎች ያለው።',
+    'p3.status':  'ተጠናቅቋል',
+    'p21.title':  'የደረጃ ጣራ ዘመናዊ ህንፃ',
+    'p21.loc':    'ባህርዳር ከተማ መሃል',
+    'p21.desc':   'ልዩ የደረጃ ቅርጽ ያለው ጣራ ንድፍ፣ ለመኖሪያና ለንግድ የተዘጋጀ ባለ ብዙ ፎቅ ህንፃ።',
+    'p21.status': 'ተጠናቅቋል',
+    'p17.title':  'የመንግስት ስታይል የመኖሪያ ብሎክ',
+    'p17.loc':    'ባህርዳር',
+    'p17.desc':   'ቀላል ግን ምቹ የመኖሪያ አፓርታማ ብሎክ፣ ለቤተሰብ መኖሪያ ተስማሚ።',
+    'p17.status': 'ተጠናቅቋል',
+    'p1.title':   'አዲስ ባለ4 ፎቅ ህንፃ',
+    'p1.loc':     'ባህርዳር',
+    'p1.desc':    'ግንባታው በመጠናቀቅ ላይ ያለ ባለ አራት ፎቅ የመኖሪያ/ንግድ ህንፃ፣ ሰፊ መስኮቶች ያለው ንድፍ።',
+    'p1.status':  'በግንባታ ላይ',
+    'p5.title':   'ባለ ብዙ ፎቅ ግዙፍ ፕሮጀክት',
+    'p5.loc':     'ባህርዳር',
+    'p5.desc':    'ትልቅ ስኬል ያለው ባለ ብዙ ፎቅ የግንባታ ፕሮጀክት፣ ገና በስካፎልዲንግ ደረጅ ላይ።',
+    'p5.status':  'በግንባታ ላይ',
+    'p19.title':  'የደረጅ ጣራ ንግድ ህንፃ',
+    'p19.loc':    'ባህርዳር ገበያ አካባቢ',
+    'p19.desc':   'በመጠናቀቅ ላይ ያለ ድብልቅ ቀለም ያለው የንግድና መኖሪያ ህንፃ፣ በከተማ መሃል ይገኛል።',
+    'p19.status': 'በግንባታ ላይ',
+    'p20.title':  'ለግንባታ ዝግጁ ባዶ ቦታ',
+    'p20.loc':    'ባህርዳር ዳርቻ',
+    'p20.desc':   'መሰረት የተጣለበት ለቤት ወይም ለንግድ ህንፃ ግንባታ ዝግጁ የሆነ ሰፊ ባዶ ቦታ።',
+    'p20.status': 'ክፍት ቦታ',
+    'p7.title':   'ከፍተኛ ፎቅ መኖሪያ ታወር',
+    'p7.loc':     'ባህርዳር',
+    'p7.desc':    'ዘመናዊ ንድፍ ያለው ከፍተኛ ፎቅ መኖሪያ ህንፃ፣ ሰፊ ባልኮኒዎች እና ምድር ላይ ንግድ ቦታ ያለው።',
+    'p7.status':  'ፕላን/ፕሮጀክት',
+    'p14.title':  'Koke Mixed Apartments',
+    'p14.loc':    'ባህርዳር',
+    'p14.desc':   'ድብልቅ ጥቅም ያለው ባለ ብዙ ህንፃ ፕሮጀክት — የንግድ ወለል እና ከፍተኛ ፎቅ መኖሪያ ክፍሎች።',
+    'p14.status': 'ፕላን/ፕሮጀክት',
+    'p12.title':  'በጣና ሐይቅ አካባቢ የመኖሪያ ሰፈር',
+    'p12.loc':    'ባህርዳር, ጣና ሐይቅ',
+    'p12.desc':   'ከላይ የተነሳ የባህርዳር ከተማ መኖሪያ ሰፈር እይታ፣ ከጣና ሐይቅ አጠገብ የሚገኙ ቪላዎችን ያሳያል።',
+    'p12.status': 'አካባቢ እይታ',
+  },
+  en: {
+    'nav.services':      'Services',
+    'nav.properties':    'Properties',
+    'nav.about':         'About',
+    'nav.contact':       'Contact',
+    'nav.call':          'Call Now',
+    'hero.eyebrow':      'Bahir Dar · Real Estate Agent & Promotion',
+    'hero.h1':           'From wherever you are,<br>we bring the <span class="accent">property</span> to you.',
+    'hero.lead':         'Maru Commission Agent & Promotion — your trusted source for land, houses, condominiums, apartments, commercial spaces, and vehicles in Bahir Dar.',
+    'hero.cta1':         'Browse Properties',
+    'hero.cta2':         'Chat on Telegram',
+    'stat.projects':     'Projects',
+    'stat.categories':   'Property Types',
+    'stat.city':         'Bahir Dar',
+    'stat.coverage':     'Area Coverage',
+    'stat.tg':           'Telegram Response',
+    'services.h2':       'We help you find what you need — from wherever you are',
+    'services.p':        'For every type of property in Bahir Dar — we deliver accurate information, expert negotiation, and trusted connections.',
+    'props.h2':          'Selected Buildings & Projects in Bahir Dar',
+    'props.p':           'From foundation to finish — residential and commercial properties at various stages. Filter by status or browse them all.',
+    'filter.all':        'All',
+    'filter.ready':      'Completed',
+    'filter.build':      'Under Construction',
+    'filter.plan':       'Planned / Project',
+    'filter.view':       'Area View',
+    'lightbox.cta':      'Inquire',
+    'about.h2':          'Making real estate in Bahir Dar simple',
+    'about.p1':          'Maru Commission Agent & Promotion is a real estate agency founded in Bahir Dar. We specialise in land, houses, condominiums, apartments, commercial spaces, and vehicle sales and purchases.',
+    'about.p2':          'Our clients reach us from anywhere — by phone, Telegram, Facebook, or WhatsApp — and receive accurate information and a fast response every time.',
+    'trust.fast.h':      'Fast Response',
+    'trust.fast.p':      'We reply quickly on Telegram and by phone',
+    'trust.verified.h':  'Verified Properties',
+    'trust.verified.p':  'Only projects we have personally visited and verified',
+    'trust.local.h':     'Local Expertise',
+    'trust.local.p':     'Full coverage across every neighbourhood in Bahir Dar',
+    'about.card.city.k': 'City',
+    'about.card.city.v': 'Bahir Dar, Ethiopia',
+    'about.card.area.k': 'Area',
+    'about.card.area.v': 'Near Lake Tana',
+    'contact.h2':        'Reach us from anywhere',
+    'contact.p':         'Call or message us however you prefer — phone, Telegram, WhatsApp, Facebook, or TikTok.',
+    'orbit.house':       'Houses',
+    'orbit.condo':       'Condos',
+    'orbit.commercial':  'Commercial',
+    'orbit.car':         'Vehicles',
+    'pin.city':          'Bahir Dar',
+    'wa.join':           'Join Group',
+    'contact.callnow':   'Call Now',
+    'contact.tgmsg':     'Send Telegram Message',
+    'mobile.tg':         'Telegram',
+    'footer.copy':       '© 2026 Maru Commission Agent & Promotion — Bahir Dar',
+    /* service cards */
+    'svc.house.title':  'House Sales & Purchase',
+    'svc.house.desc':   'Accurate information and negotiation support for buying or selling residential homes.',
+    'svc.condo.title':  'Condominiums',
+    'svc.condo.desc':   'We connect you with condominium units in the city — for purchase or rent.',
+    'svc.apt.title':    'Apartments',
+    'svc.apt.desc':     'A wide range of apartment options from small units to large-scale projects.',
+    'svc.land.title':   'Land / Empty Plots',
+    'svc.land.desc':    'Construction-ready plots with full legal documentation support.',
+    'svc.comm.title':   'Commercial Spaces',
+    'svc.comm.desc':    'We identify commercial spaces for offices, shops, or warehouses.',
+    'svc.car.title':    'Vehicle Sales',
+    'svc.car.desc':     'We facilitate accurate vehicle listings and connect buyers with sellers.',
+    'svc.loc.title':    'Location Scouting',
+    'svc.loc.desc':     'Area information and property photos delivered remotely, wherever you are.',
+    'svc.ver.title':    'Negotiation & Verification',
+    'svc.ver.desc':     'We facilitate transparent and trustworthy negotiations between owners and buyers.',
+    /* property entries */
+    'p9.title':   'Multi-Storey Apartment — Main Road',
+    'p9.loc':     'Bahir Dar Main Road',
+    'p9.desc':    'A multi-storey residential/commercial building with direct road frontage, suitable for living and business.',
+    'p9.status':  'Completed',
+    'p3.title':   'Mixed-Use Commercial & Residential Building',
+    'p3.loc':     'Bahir Dar City',
+    'p3.desc':    'Ground-floor commercial units with upper-floor residences and wide balconies.',
+    'p3.status':  'Completed',
+    'p21.title':  'Stepped-Roof Modern Building',
+    'p21.loc':    'Bahir Dar City Centre',
+    'p21.desc':   'A multi-storey building with a distinctive stepped roofline, designed for residential and commercial use.',
+    'p21.status': 'Completed',
+    'p17.title':  'Residential Apartment Block',
+    'p17.loc':    'Bahir Dar',
+    'p17.desc':   'A practical and comfortable residential apartment block, ideal for family living.',
+    'p17.status': 'Completed',
+    'p1.title':   'New 4-Storey Building',
+    'p1.loc':     'Bahir Dar',
+    'p1.desc':    'A four-storey residential/commercial building nearing completion, with spacious window design.',
+    'p1.status':  'Under Construction',
+    'p5.title':   'Large-Scale Multi-Storey Project',
+    'p5.loc':     'Bahir Dar',
+    'p5.desc':    'A large-scale multi-storey construction project currently in the scaffolding stage.',
+    'p5.status':  'Under Construction',
+    'p19.title':  'Stepped-Roof Commercial Building',
+    'p19.loc':    'Bahir Dar Market Area',
+    'p19.desc':   'A mixed-use building with a colourful stepped design, located in the city centre.',
+    'p19.status': 'Under Construction',
+    'p20.title':  'Construction-Ready Empty Plot',
+    'p20.loc':    'Bahir Dar Outskirts',
+    'p20.desc':   'A spacious plot with foundations laid, ready for residential or commercial construction.',
+    'p20.status': 'Open Land',
+    'p7.title':   'High-Rise Residential Tower',
+    'p7.loc':     'Bahir Dar',
+    'p7.desc':    'A modern high-rise residential tower with wide balconies and ground-floor commercial space.',
+    'p7.status':  'Planned / Project',
+    'p14.title':  'Koke Mixed Apartments',
+    'p14.loc':    'Bahir Dar',
+    'p14.desc':   'A multi-building mixed-use project — commercial ground floor and high-rise residential units above.',
+    'p14.status': 'Planned / Project',
+    'p12.title':  'Lakeside Residential Neighbourhood',
+    'p12.loc':    'Bahir Dar, Lake Tana',
+    'p12.desc':   'An aerial view of a Bahir Dar residential neighbourhood, showing villas near Lake Tana.',
+    'p12.status': 'Area View',
+  }
+};
+
+/* =====================================================
+   3. DATA
+   ===================================================== */
+const PROPERTIES_DATA = [
+  { key:'9',  status:'ready', type:'APARTMENT' },
+  { key:'3',  status:'ready', type:'COMMERCIAL' },
+  { key:'21', status:'ready', type:'APARTMENT' },
+  { key:'17', status:'ready', type:'APARTMENT' },
+  { key:'1',  status:'build', type:'BUILDING' },
+  { key:'5',  status:'build', type:'BUILDING' },
+  { key:'19', status:'build', type:'BUILDING' },
+  { key:'20', status:'plan',  type:'LAND' },
+  { key:'7',  status:'plan',  type:'TOWER' },
+  { key:'14', status:'plan',  type:'TOWER' },
+  { key:'12', status:'view',  type:'AREA' },
+];
+
+const SERVICES_DATA = [
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg>',  tkTitle:'svc.house.title', tkDesc:'svc.house.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>', tkTitle:'svc.condo.title', tkDesc:'svc.condo.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 4l9 5.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>', tkTitle:'svc.apt.title', tkDesc:'svc.apt.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/><path d="M3 8h18"/></svg>', tkTitle:'svc.land.title', tkDesc:'svc.land.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18v10H3zM3 9l3-5h12l3 5M7 14h2m6 0h2"/></svg>', tkTitle:'svc.comm.title', tkDesc:'svc.comm.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M6 17v-5l1.5-4.5h9L18 12v5M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0"/></svg>', tkTitle:'svc.car.title', tkDesc:'svc.car.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>', tkTitle:'svc.loc.title', tkDesc:'svc.loc.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>', tkTitle:'svc.ver.title', tkDesc:'svc.ver.desc' },
+];
+
+const FILTERS_DATA = [
+  { key:'all',   tk:'filter.all' },
+  { key:'ready', tk:'filter.ready' },
+  { key:'build', tk:'filter.build' },
+  { key:'plan',  tk:'filter.plan' },
+  { key:'view',  tk:'filter.view' },
+];
+
+const statusClassMap = { ready:'status-ready', build:'status-build', plan:'status-plan', view:'status-ready' };
+
+/* =====================================================
+   4. LANGUAGE ENGINE
+   ===================================================== */
+let currentLang = 'am';
+
+function t(key){
+  return TRANSLATIONS[currentLang][key] || TRANSLATIONS['am'][key] || key;
+}
+
+function applyTranslations(){
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if(val !== undefined) el.innerHTML = val;
+  });
+  document.documentElement.lang = currentLang === 'am' ? 'am' : 'en';
+  // Re-render dynamic sections
+  renderServices();
+  renderFilters();
+  renderProperties();
+  initFilters();
+  initLightbox();
+}
+
+function switchLang(lang){
+  if(lang === currentLang) return;
+  currentLang = lang;
+  const segAM = document.getElementById('segAM');
+  const segEN = document.getElementById('segEN');
+  segAM.classList.toggle('active', lang === 'am');
+  segEN.classList.toggle('active', lang === 'en');
+  document.body.classList.add('lang-switching');
+  setTimeout(() => {
+    applyTranslations();
+    document.body.classList.remove('lang-switching');
+  }, 160);
+}
+
+/* =====================================================
+   5. RENDER FUNCTIONS
+   ===================================================== */
+function renderMarquee(){
+  const items = SERVICES_DATA.map(s =>
+    `<div class="marquee-item">${s.icon.replace('viewBox','width="16" height="16" viewBox')}<span>${t(s.tkTitle)}</span></div>`
+  ).join('');
+  document.getElementById('marqueeTrack').innerHTML = items + items;
+}
+
+function renderServices(){
+  document.getElementById('servicesGrid').innerHTML = SERVICES_DATA.map(s => `
+    <div class="svc-card reveal">
+      <div class="svc-icon">${s.icon}</div>
+      <h3>${t(s.tkTitle)}</h3>
+      <p>${t(s.tkDesc)}</p>
+    </div>
+  `).join('');
+  // re-observe new cards
+  observeReveal();
+}
+
+function renderFilters(){
+  document.getElementById('filterBar').innerHTML = FILTERS_DATA.map((f,i) => `
+    <button class="filter-btn${i===0?' active':''}" data-filter="${f.key}">${t(f.tk)}</button>
+  `).join('');
+}
+
+function renderProperties(){
+  document.getElementById('propGrid').innerHTML = PROPERTIES_DATA.map(p => {
+    const title  = t(`p${p.key}.title`);
+    const loc    = t(`p${p.key}.loc`);
+    const desc   = t(`p${p.key}.desc`);
+    const status = t(`p${p.key}.status`);
+    return `
+      <div class="prop-card reveal" data-status="${p.status}" data-key="${p.key}">
+        <div class="prop-img">
+          <img src="${IMG[p.key]}" alt="${title}" loading="lazy">
+          <span class="prop-badge ${statusClassMap[p.status]}">${status}</span>
+          <span class="prop-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ${loc}
+          </span>
+        </div>
+        <div class="prop-body">
+          <h3>${title}</h3>
+          <p>${desc}</p>
+          <div class="prop-foot">
+            <span class="prop-type">${p.type}</span>
+            <div class="prop-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  observeReveal();
+}
+
+/* =====================================================
+   6. INTERACTIONS
+   ===================================================== */
+function initFilters(){
+  const btns = document.querySelectorAll('.filter-btn');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.prop-card').forEach(card => {
+        if(f === 'all' || card.dataset.status === f){
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+function initLightbox(){
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lightboxImg');
+  const lbTitle = document.getElementById('lightboxTitle');
+  const lbDesc  = document.getElementById('lightboxDesc');
+
+  document.querySelectorAll('.prop-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.key;
+      lbImg.src       = IMG[key] || '';
+      lbTitle.textContent = t(`p${key}.title`);
+      lbDesc.textContent  = t(`p${key}.desc`);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lb.addEventListener('click', e => { if(e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+  function closeLightbox(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function initDrawer(){
+  const drawer = document.getElementById('drawer');
+  document.getElementById('burgerBtn').addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('drawerClose').addEventListener('click', () => drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => drawer.classList.remove('open')));
+}
+
+function initLangToggle(){
+  document.getElementById('langToggle').addEventListener('click', () => {
+    switchLang(currentLang === 'am' ? 'en' : 'am');
+  });
+}
+
+let revealObserver;
+function observeReveal(){
+  if(!revealObserver){
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.10 });
+  }
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+/* =====================================================
+   7. BOOT
+   ===================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+  renderMarquee();
+  renderServices();
+  renderFilters();
+  renderProperties();
+  initFilters();
+  initLightbox();
+  initDrawer();
+  initLangToggle();
+  observeReveal();
+});
+</script>
+<footer class="site-footer">
+  <div class="footer-content">
+
+    <!-- Logo Section -->
+    <div class="footer-logo">
+      <img src="static/img/logo.jpg" alt="STEWS PLC Logo" style="width:300px; height:auto;">
+    </div>
+
+    <!-- Creator Section -->
+    <div class="creator-info">
+      <h3>Website Developed By</h3>
+
+      <h2>SMART TECH SOFTWARE ENGINEERING WORKS AND SERVICE PLC (STEWS PLC)</h2>
+
+      <p><strong>Dr. Asmamaw Chanie (Ph.D)</strong></p>
+      <p>Full Stack Software Engineer</p>
+      <p>Assistant Professor at Bahir Dar University (BDU)</p>
+
+      <p>
+        ✉️ Email:
+        <a href="mailto:chanieasmamaw@yahoo.com">
+          chanieasmamaw@yahoo.com
+        </a>
+      </p>
+
+      <p>
+        🔗 LinkedIn:
+        <a href="https://linkedin.com/in/asmamaw-chanie-yehun" target="_blank">
+          linkedin.com/in/asmamaw-chanie-yehun
+        </a>
+      </p>
+
+      <p>
+        📞 Phone:
+        <a href="tel:+251975882230">
+          +251 975 882 230
+        </a>
+      </p>
+
+      <p>
+        📍 Bahir Dar City, Amhara Region, Ethiopia
+      </p>
+    </div>
+
+    <!-- Copyright -->
+    <div class="copyright">
+
+    </div>
+
+  </div>
+</footer>
+</body>
+</html>
