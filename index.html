@@ -324,6 +324,85 @@
   .prop-arrow svg{width:14px;height:14px;color:var(--teal-deep);transition:color .2s ease;}
   .prop-card:hover .prop-arrow svg{color:#fff;}
 
+  /* ---------- GALLERY SECTION ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  @media (max-width:980px){.gallery-grid{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .gallery-item{
+    position:relative;aspect-ratio:1;overflow:hidden;border-radius:14px;
+    background:var(--cream-soft);cursor:pointer;
+  }
+  .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .gallery-item:hover img{transform:scale(1.08);}
+  .gallery-item .gal-overlay{
+    position:absolute;inset:0;background:rgba(16,39,51,0.0);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .3s ease;
+  }
+  .gallery-item:hover .gal-overlay{background:rgba(16,39,51,0.45);}
+  .gallery-item .gal-overlay svg{
+    opacity:0;transform:scale(0.7);transition:opacity .3s ease, transform .3s ease;
+    color:#fff;width:32px;height:32px;
+  }
+  .gallery-item:hover .gal-overlay svg{opacity:1;transform:scale(1);}
+
+  /* ---------- VIDEO SECTION ---------- */
+  .video-section{background:var(--teal-deep);color:var(--cream);}
+  .video-section .sec-head .tag{color:var(--ochre);}
+  .video-section .sec-head h2{color:var(--cream);}
+  .video-section .sec-head p{color:rgba(242,237,228,0.72);}
+
+  .music-toggle{
+    display:flex;align-items:center;gap:9px;
+    background:rgba(242,237,228,0.08);
+    border:1.5px solid rgba(242,237,228,0.22);
+    color:var(--cream);
+    padding:11px 18px;border-radius:100px;
+    font-size:13px;font-weight:600;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease;
+    flex-shrink:0;
+  }
+  .music-toggle svg{width:16px;height:16px;flex-shrink:0;}
+  .music-toggle:hover{background:rgba(242,237,228,0.16);transform:translateY(-2px);}
+  .music-toggle.is-playing{background:rgba(232,163,61,0.18);border-color:rgba(232,163,61,0.5);color:var(--ochre);}
+
+  .video-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  @media (max-width:980px){.video-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.video-grid{grid-template-columns:1fr;}}
+
+  .video-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(242,237,228,0.12);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .video-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px -15px rgba(0,0,0,0.5);}
+  .video-card video{
+    width:100%;display:block;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    background:#000;
+  }
+  .video-card .vid-body{padding:16px 18px;}
+  .video-card .vid-title{
+    font-family:var(--ff-display);font-size:15px;font-weight:700;
+    color:var(--cream);margin-bottom:4px;
+  }
+  .video-card .vid-sub{
+    font-family:var(--ff-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;
+    color:var(--ochre);
+  }
+
   /* ---------- LIGHTBOX ---------- */
   .lightbox{
     position:fixed;inset:0;z-index:300;background:rgba(10,18,22,0.94);
@@ -484,9 +563,18 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
 
-  /* lang transition */
   [data-i18n]{transition:opacity .18s ease;}
   body.lang-switching [data-i18n]{opacity:0;}
+
+  /* site-footer developer */
+  .site-footer{background:#0a1318;color:rgba(242,237,228,0.5);padding:40px 0 24px;text-align:center;}
+  .site-footer .footer-content{max-width:680px;margin:0 auto;padding:0 24px;}
+  .site-footer .footer-logo{margin-bottom:20px;display:flex;justify-content:center;}
+  .site-footer h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-family:var(--ff-mono);color:rgba(242,237,228,0.4);margin-bottom:12px;}
+  .site-footer h2{font-family:var(--ff-display);font-size:16px;font-weight:700;color:rgba(242,237,228,0.75);margin-bottom:14px;line-height:1.4;}
+  .site-footer p{font-size:13px;line-height:1.7;margin-bottom:4px;}
+  .site-footer a{color:var(--ochre);}
+  .site-footer a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -504,11 +592,12 @@
     <div class="nav-links">
       <a href="#services" data-i18n="nav.services">አገልግሎቶች</a>
       <a href="#properties" data-i18n="nav.properties">ንብረቶች</a>
+      <a href="#gallery" data-i18n="nav.gallery">ጋለሪ</a>
+      <a href="#videos" data-i18n="nav.videos">ቪዲዮዎች</a>
       <a href="#about" data-i18n="nav.about">ስለ እኛ</a>
       <a href="#contact" data-i18n="nav.contact">አግኙን</a>
     </div>
     <div class="nav-right">
-      <!-- Language Toggle -->
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="lseg active" id="segAM">አማ</span>
         <span class="lseg" id="segEN">EN</span>
@@ -528,6 +617,8 @@
   <button class="drawer-close" id="drawerClose"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <a href="#services" class="dlink" data-i18n="nav.services">አገልግሎቶች</a>
   <a href="#properties" class="dlink" data-i18n="nav.properties">ንብረቶች</a>
+  <a href="#gallery" class="dlink" data-i18n="nav.gallery">ጋለሪ</a>
+  <a href="#videos" class="dlink" data-i18n="nav.videos">ቪዲዮዎች</a>
   <a href="#about" class="dlink" data-i18n="nav.about">ስለ እኛ</a>
   <a href="#contact" class="dlink" data-i18n="nav.contact">አግኙን</a>
 </div>
@@ -550,7 +641,7 @@
       </a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="num">12+</div><div class="label" data-i18n="stat.projects">ፕሮጀክቶች</div></div>
+      <div class="stat"><div class="num">24+</div><div class="label" data-i18n="stat.projects">ፕሮጀክቶች</div></div>
       <div class="stat"><div class="num">6</div><div class="label" data-i18n="stat.categories">የንብረት ምድቦች</div></div>
       <div class="stat"><div class="num" data-i18n="stat.city">ባህርዳር</div><div class="label" data-i18n="stat.coverage">አካባቢ ሽፋን</div></div>
       <div class="stat"><div class="num">24/7</div><div class="label" data-i18n="stat.tg">በቴሌግራም ምላሽ</div></div>
@@ -589,6 +680,40 @@
     <div class="filter-bar" id="filterBar"></div>
     <div class="prop-grid" id="propGrid"></div>
   </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">GALLERY · <span data-i18n="nav.gallery">ጋለሪ</span></span>
+      <h2 data-i18n="gallery.h2">የፎቶ ጋለሪ</h2>
+      <p data-i18n="gallery.p">ከባህርዳር ከተማ ውስጥ የተሰበሰቡ የህንፃ እና አካባቢ ፎቶዎች።</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ===== VIDEOS ===== -->
+<section id="videos" class="video-section">
+  <div class="wrap">
+    <div class="sec-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+      <div>
+        <span class="tag">VIDEOS · <span data-i18n="nav.videos">ቪዲዮዎች</span></span>
+        <h2 data-i18n="videos.h2">የቪዲዮ ቅኝት</h2>
+        <p data-i18n="videos.p">ንብረቶቻችንን በቪዲዮ ይዳስሱ — ካሉበት ቦታ ሆነው።</p>
+      </div>
+      <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">
+        <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        <span data-i18n="music.toggle">ባህላዊ ሙዚቃ</span>
+      </button>
+    </div>
+    <div class="video-grid" id="videoGrid"></div>
+  </div>
+  <audio id="bgMusic" loop preload="none">
+    <source src="static/audio/amharic-classic.mp3.mp3" type="audio/mpeg">
+  </audio>
 </section>
 
 <!-- ===== LIGHTBOX ===== -->
@@ -732,6 +857,8 @@
       <div class="foot-links">
         <a href="#services" data-i18n="nav.services">አገልግሎቶች</a>
         <a href="#properties" data-i18n="nav.properties">ንብረቶች</a>
+        <a href="#gallery" data-i18n="nav.gallery">ጋለሪ</a>
+        <a href="#videos" data-i18n="nav.videos">ቪዲዮዎች</a>
         <a href="#about" data-i18n="nav.about">ስለ እኛ</a>
         <a href="#contact" data-i18n="nav.contact">አግኙን</a>
       </div>
@@ -755,26 +882,56 @@
   </a>
 </div>
 
-<!-- ================================================================
-     JAVASCRIPT
-     ================================================================ -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <img src="static/img/logo.jpg" alt="STEWS PLC Logo" style="width:300px;height:auto;">
+    </div>
+    <h3>Website Developed By</h3>
+    <h2>SMART TECH SOFTWARE ENGINEERING WORKS AND SERVICE PLC (STEWS PLC)</h2>
+    <p><strong>Dr. Asmamaw Chanie (Ph.D)</strong></p>
+    <p>Full Stack Software Engineer</p>
+    <p>Assistant Professor at Bahir Dar University (BDU)</p>
+    <p>✉️ Email: <a href="mailto:chanieasmamaw@yahoo.com">chanieasmamaw@yahoo.com</a></p>
+    <p>🔗 LinkedIn: <a href="https://linkedin.com/in/asmamaw-chanie-yehun" target="_blank">linkedin.com/in/asmamaw-chanie-yehun</a></p>
+    <p>📞 Phone: <a href="tel:+251975882230">+251 975 882 230</a></p>
+    <p>📍 Bahir Dar City, Amhara Region, Ethiopia</p>
+  </div>
+</footer>
+
 <script>
 /* =====================================================
-   1. IMAGE PATHS — relative to project root
-   Each key maps to static/img/{key}.jpeg
+   1. IMAGE & VIDEO PATHS
    ===================================================== */
 const IMG = {};
 [1,3,5,7,9,12,14,17,19,20,21].forEach(k => {
   IMG[String(k)] = `static/img/${k}.jpeg`;
 });
 
+// Gallery images 28-40
+const GALLERY_IMGS = [];
+for(let i = 28; i <= 40; i++){
+  GALLERY_IMGS.push(`static/img/${i}.jpeg`);
+}
+
+// Videos ved1-ved5
+const VIDEOS = [
+  { src:'static/img/ved1.mp4', tkTitle:'vid.1.title', tkSub:'vid.sub' },
+  { src:'static/img/ved2.mp4', tkTitle:'vid.2.title', tkSub:'vid.sub' },
+  { src:'static/img/ved3.mp4', tkTitle:'vid.3.title', tkSub:'vid.sub' },
+  { src:'static/img/ved4.mp4', tkTitle:'vid.4.title', tkSub:'vid.sub' },
+  { src:'static/img/ved5.mp4', tkTitle:'vid.5.title', tkSub:'vid.sub' },
+];
+
 /* =====================================================
-   2. TRANSLATIONS — AM (Amharic) & EN (English)
+   2. TRANSLATIONS
    ===================================================== */
 const TRANSLATIONS = {
   am: {
     'nav.services':      'አገልግሎቶች',
     'nav.properties':    'ንብረቶች',
+    'nav.gallery':       'ጋለሪ',
+    'nav.videos':        'ቪዲዮዎች',
     'nav.about':         'ስለ እኛ',
     'nav.contact':       'አግኙን',
     'nav.call':          'ይደውሉ',
@@ -791,7 +948,12 @@ const TRANSLATIONS = {
     'services.h2':       'ከመረጡት ቦታ ሆነው የሚፈልጉትን እንዲያገኙ እናደርጋለን',
     'services.p':        'በባህርዳር ከተማ ውስጥ ካለው እያንዳንዱ የንብረት ዓይነት — መረጃ፣ ድርድር እና ትክክለኛ ግንኙነት እናቀርባለን።',
     'props.h2':          'በባህርዳር የተመረጡ ህንፃዎችና ፕሮጀክቶች',
-    'props.p':           'ከመሰረት እስከ ፍጻሜ — በተለያየ ደረጃ ላይ ያሉ የመኖሪያና የንግድ ህንፃዎችን ይዘን ቀርበናል። ማጣራት ይምረጡ ወይም ሁሉንም ይዳስሱ።',
+    'props.p':           'ከመሰረት እስከ ፍጻሜ — በተለያየ ደረጃ ላይ ያሉ የመኖሪያና የንግድ ህንፃዎችን ይዘን ቀርበናል።',
+    'gallery.h2':        'የፎቶ ጋለሪ',
+    'gallery.p':         'ከባህርዳር ከተማ ውስጥ የተሰበሰቡ የህንፃ እና አካባቢ ፎቶዎች።',
+    'videos.h2':         'የቪዲዮ ቅኝት',
+    'videos.p':          'ንብረቶቻችንን በቪዲዮ ይዳስሱ — ካሉበት ቦታ ሆነው።',
+    'music.toggle':      'ባህላዊ ሙዚቃ',
     'filter.all':        'ሁሉም',
     'filter.ready':      'ተጠናቅቋል',
     'filter.build':      'በግንባታ ላይ',
@@ -799,7 +961,7 @@ const TRANSLATIONS = {
     'filter.view':       'አካባቢ እይታ',
     'lightbox.cta':      'ይጠይቁ',
     'about.h2':          'በባህርዳር የንብረት ግብይትን ቀላል እናደርጋለን',
-    'about.p1':          'ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን በባህርዳር ከተማ የተመሰረተ የንብረት ወኪል ድርጅት ነው። ስራችን ባዶ ቦታ፣ ቤት፣ ኮንዶሚኒየም፣ አፓርታማ፣ የንግድ ቦታ እና መኪና ሽያጭና ግዢ ላይ የተሰማራ ነው።',
+    'about.p1':          'ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን በባህርዳር ከተማ የተመሰረተ የንብረት ወኪል ድርጅት ነው።',
     'about.p2':          'ደንበኞቻችን ካሉበት ቦታ ሆነው — በስልክ፣ በቴሌግራም፣ በፌስቡክ ወይም በዋትስአፕ — ትክክለኛ መረጃ እና ፍጥነት ያለው ምላሽ እንዲያገኙ እንሰራለን።',
     'trust.fast.h':      'ፈጣን ምላሽ',
     'trust.fast.p':      'በቴሌግራም እና ስልክ በፍጥነት እንመላለሳለን',
@@ -823,7 +985,6 @@ const TRANSLATIONS = {
     'contact.tgmsg':     'በቴሌግራም መልዕክት ይላኩ',
     'mobile.tg':         'ቴሌግራም',
     'footer.copy':       '© 2026 ማሩ ኮሚሽን ኤጄንት እና ፕሮሞሽን — ባህርዳር',
-    /* service cards */
     'svc.house.title':   'ቤት ሽያጭና ግዢ',
     'svc.house.desc':    'ለመኖሪያ ተስማሚ ቤቶችን ለመሸጥ ወይም ለመግዛት ትክክለኛ መረጃ እና ድርድር ድጋፍ።',
     'svc.condo.title':   'ኮንዶሚኒየም',
@@ -840,55 +1001,63 @@ const TRANSLATIONS = {
     'svc.loc.desc':      'ካሉበት ቦታ ሆነው የምትፈልጉትን አካባቢ መረጃ እና ምስል እናደርስዎታለን።',
     'svc.ver.title':     'ድርድርና ማረጋገጫ',
     'svc.ver.desc':      'ከንብረት ባለቤት እና ገዢ መካከል ግልጽና ታማኝ ድርድር እንመቻቻለን።',
-    /* property entries */
     'p9.title':   'ብዙ ፎቅ አፓርታማ — ዋና መንገድ',
     'p9.loc':     'ባህርዳር ዋና መንገድ',
-    'p9.desc':    'ለመኖሪያና ለንግድ የተመቸ፣ ከመንገድ ቀጥታ ታይነት ያለው ባለብዙ ፎቅ የመኖሪያ/ንግድ ህንፃ።',
+    'p9.desc':    'ለመኖሪያና ለንግድ የተመቸ፣ ከመንገድ ቀጥታ ታይነት ያለው ባለብዙ ፎቅ ህንፃ።',
     'p9.status':  'ተጠናቅቋል',
     'p3.title':   'የንግድና መኖሪያ ድብልቅ ህንፃ',
     'p3.loc':     'ባህርዳር ከተማ',
-    'p3.desc':    'በምድር ላይ የንግድ ሱቆችን እና በላይ ፎቆች ላይ የመኖሪያ ክፍሎችን የያዘ ህንፃ፣ ሰፊ ባልኮኒዎች ያለው።',
+    'p3.desc':    'በምድር ላይ የንግድ ሱቆችን እና በላይ ፎቆች ላይ የመኖሪያ ክፍሎችን የያዘ ህንፃ።',
     'p3.status':  'ተጠናቅቋል',
     'p21.title':  'የደረጃ ጣራ ዘመናዊ ህንፃ',
     'p21.loc':    'ባህርዳር ከተማ መሃል',
-    'p21.desc':   'ልዩ የደረጃ ቅርጽ ያለው ጣራ ንድፍ፣ ለመኖሪያና ለንግድ የተዘጋጀ ባለ ብዙ ፎቅ ህንፃ።',
+    'p21.desc':   'ልዩ የደረጃ ቅርጽ ያለው ጣራ ንድፍ ያለው ባለ ብዙ ፎቅ ህንፃ።',
     'p21.status': 'ተጠናቅቋል',
-    'p17.title':  'የመንግስት ስታይል የመኖሪያ ብሎክ',
+    'p17.title':  'የመኖሪያ አፓርታማ ብሎክ',
     'p17.loc':    'ባህርዳር',
     'p17.desc':   'ቀላል ግን ምቹ የመኖሪያ አፓርታማ ብሎክ፣ ለቤተሰብ መኖሪያ ተስማሚ።',
     'p17.status': 'ተጠናቅቋል',
     'p1.title':   'አዲስ ባለ4 ፎቅ ህንፃ',
     'p1.loc':     'ባህርዳር',
-    'p1.desc':    'ግንባታው በመጠናቀቅ ላይ ያለ ባለ አራት ፎቅ የመኖሪያ/ንግድ ህንፃ፣ ሰፊ መስኮቶች ያለው ንድፍ።',
+    'p1.desc':    'ግንባታው በመጠናቀቅ ላይ ያለ ባለ አራት ፎቅ ህንፃ።',
     'p1.status':  'በግንባታ ላይ',
     'p5.title':   'ባለ ብዙ ፎቅ ግዙፍ ፕሮጀክት',
     'p5.loc':     'ባህርዳር',
-    'p5.desc':    'ትልቅ ስኬል ያለው ባለ ብዙ ፎቅ የግንባታ ፕሮጀክት፣ ገና በስካፎልዲንግ ደረጅ ላይ።',
+    'p5.desc':    'ትልቅ ስኬል ያለው ባለ ብዙ ፎቅ የግንባታ ፕሮጀክት።',
     'p5.status':  'በግንባታ ላይ',
     'p19.title':  'የደረጅ ጣራ ንግድ ህንፃ',
     'p19.loc':    'ባህርዳር ገበያ አካባቢ',
-    'p19.desc':   'በመጠናቀቅ ላይ ያለ ድብልቅ ቀለም ያለው የንግድና መኖሪያ ህንፃ፣ በከተማ መሃል ይገኛል።',
+    'p19.desc':   'በመጠናቀቅ ላይ ያለ ድብልቅ ቀለም ያለው ህንፃ።',
     'p19.status': 'በግንባታ ላይ',
     'p20.title':  'ለግንባታ ዝግጁ ባዶ ቦታ',
     'p20.loc':    'ባህርዳር ዳርቻ',
-    'p20.desc':   'መሰረት የተጣለበት ለቤት ወይም ለንግድ ህንፃ ግንባታ ዝግጁ የሆነ ሰፊ ባዶ ቦታ።',
+    'p20.desc':   'መሰረት የተጣለበት ሰፊ ባዶ ቦታ።',
     'p20.status': 'ክፍት ቦታ',
     'p7.title':   'ከፍተኛ ፎቅ መኖሪያ ታወር',
     'p7.loc':     'ባህርዳር',
-    'p7.desc':    'ዘመናዊ ንድፍ ያለው ከፍተኛ ፎቅ መኖሪያ ህንፃ፣ ሰፊ ባልኮኒዎች እና ምድር ላይ ንግድ ቦታ ያለው።',
+    'p7.desc':    'ዘመናዊ ንድፍ ያለው ከፍተኛ ፎቅ መኖሪያ ህንፃ።',
     'p7.status':  'ፕላን/ፕሮጀክት',
     'p14.title':  'Koke Mixed Apartments',
     'p14.loc':    'ባህርዳር',
-    'p14.desc':   'ድብልቅ ጥቅም ያለው ባለ ብዙ ህንፃ ፕሮጀክት — የንግድ ወለል እና ከፍተኛ ፎቅ መኖሪያ ክፍሎች።',
+    'p14.desc':   'ድብልቅ ጥቅም ያለው ባለ ብዙ ህንፃ ፕሮጀክት።',
     'p14.status': 'ፕላን/ፕሮጀክት',
     'p12.title':  'በጣና ሐይቅ አካባቢ የመኖሪያ ሰፈር',
     'p12.loc':    'ባህርዳር, ጣና ሐይቅ',
-    'p12.desc':   'ከላይ የተነሳ የባህርዳር ከተማ መኖሪያ ሰፈር እይታ፣ ከጣና ሐይቅ አጠገብ የሚገኙ ቪላዎችን ያሳያል።',
+    'p12.desc':   'ከላይ የተነሳ የባህርዳር ከተማ መኖሪያ ሰፈር እይታ።',
     'p12.status': 'አካባቢ እይታ',
+    'gal.photo':  'ፎቶ',
+    'vid.1.title':'የህንፃ ቪዲዮ 1',
+    'vid.2.title':'የህንፃ ቪዲዮ 2',
+    'vid.3.title':'የህንፃ ቪዲዮ 3',
+    'vid.4.title':'የህንፃ ቪዲዮ 4',
+    'vid.5.title':'የህንፃ ቪዲዮ 5',
+    'vid.sub':    'ባህርዳር · ማሩ ኮሚሽን',
   },
   en: {
     'nav.services':      'Services',
     'nav.properties':    'Properties',
+    'nav.gallery':       'Gallery',
+    'nav.videos':        'Videos',
     'nav.about':         'About',
     'nav.contact':       'Contact',
     'nav.call':          'Call Now',
@@ -903,9 +1072,14 @@ const TRANSLATIONS = {
     'stat.coverage':     'Area Coverage',
     'stat.tg':           'Telegram Response',
     'services.h2':       'We help you find what you need — from wherever you are',
-    'services.p':        'For every type of property in Bahir Dar — we deliver accurate information, expert negotiation, and trusted connections.',
+    'services.p':        'For every type of property in Bahir Dar — information, negotiation, and trusted connections.',
     'props.h2':          'Selected Buildings & Projects in Bahir Dar',
-    'props.p':           'From foundation to finish — residential and commercial properties at various stages. Filter by status or browse them all.',
+    'props.p':           'From foundation to finish — residential and commercial properties at various stages.',
+    'gallery.h2':        'Photo Gallery',
+    'gallery.p':         'A curated collection of building and neighbourhood photos from Bahir Dar.',
+    'videos.h2':         'Video Tour',
+    'videos.p':          'Explore our properties through video — from wherever you are.',
+    'music.toggle':      'Traditional Music',
     'filter.all':        'All',
     'filter.ready':      'Completed',
     'filter.build':      'Under Construction',
@@ -913,7 +1087,7 @@ const TRANSLATIONS = {
     'filter.view':       'Area View',
     'lightbox.cta':      'Inquire',
     'about.h2':          'Making real estate in Bahir Dar simple',
-    'about.p1':          'Maru Commission Agent & Promotion is a real estate agency founded in Bahir Dar. We specialise in land, houses, condominiums, apartments, commercial spaces, and vehicle sales and purchases.',
+    'about.p1':          'Maru Commission Agent & Promotion is a real estate agency founded in Bahir Dar. We specialise in land, houses, condominiums, apartments, commercial spaces, and vehicle sales.',
     'about.p2':          'Our clients reach us from anywhere — by phone, Telegram, Facebook, or WhatsApp — and receive accurate information and a fast response every time.',
     'trust.fast.h':      'Fast Response',
     'trust.fast.p':      'We reply quickly on Telegram and by phone',
@@ -937,7 +1111,6 @@ const TRANSLATIONS = {
     'contact.tgmsg':     'Send Telegram Message',
     'mobile.tg':         'Telegram',
     'footer.copy':       '© 2026 Maru Commission Agent & Promotion — Bahir Dar',
-    /* service cards */
     'svc.house.title':  'House Sales & Purchase',
     'svc.house.desc':   'Accurate information and negotiation support for buying or selling residential homes.',
     'svc.condo.title':  'Condominiums',
@@ -954,10 +1127,9 @@ const TRANSLATIONS = {
     'svc.loc.desc':     'Area information and property photos delivered remotely, wherever you are.',
     'svc.ver.title':    'Negotiation & Verification',
     'svc.ver.desc':     'We facilitate transparent and trustworthy negotiations between owners and buyers.',
-    /* property entries */
     'p9.title':   'Multi-Storey Apartment — Main Road',
     'p9.loc':     'Bahir Dar Main Road',
-    'p9.desc':    'A multi-storey residential/commercial building with direct road frontage, suitable for living and business.',
+    'p9.desc':    'A multi-storey residential/commercial building with direct road frontage.',
     'p9.status':  'Completed',
     'p3.title':   'Mixed-Use Commercial & Residential Building',
     'p3.loc':     'Bahir Dar City',
@@ -965,7 +1137,7 @@ const TRANSLATIONS = {
     'p3.status':  'Completed',
     'p21.title':  'Stepped-Roof Modern Building',
     'p21.loc':    'Bahir Dar City Centre',
-    'p21.desc':   'A multi-storey building with a distinctive stepped roofline, designed for residential and commercial use.',
+    'p21.desc':   'A multi-storey building with a distinctive stepped roofline.',
     'p21.status': 'Completed',
     'p17.title':  'Residential Apartment Block',
     'p17.loc':    'Bahir Dar',
@@ -973,7 +1145,7 @@ const TRANSLATIONS = {
     'p17.status': 'Completed',
     'p1.title':   'New 4-Storey Building',
     'p1.loc':     'Bahir Dar',
-    'p1.desc':    'A four-storey residential/commercial building nearing completion, with spacious window design.',
+    'p1.desc':    'A four-storey residential/commercial building nearing completion.',
     'p1.status':  'Under Construction',
     'p5.title':   'Large-Scale Multi-Storey Project',
     'p5.loc':     'Bahir Dar',
@@ -981,11 +1153,11 @@ const TRANSLATIONS = {
     'p5.status':  'Under Construction',
     'p19.title':  'Stepped-Roof Commercial Building',
     'p19.loc':    'Bahir Dar Market Area',
-    'p19.desc':   'A mixed-use building with a colourful stepped design, located in the city centre.',
+    'p19.desc':   'A mixed-use building with a colourful stepped design, in the city centre.',
     'p19.status': 'Under Construction',
     'p20.title':  'Construction-Ready Empty Plot',
     'p20.loc':    'Bahir Dar Outskirts',
-    'p20.desc':   'A spacious plot with foundations laid, ready for residential or commercial construction.',
+    'p20.desc':   'A spacious plot with foundations laid, ready for construction.',
     'p20.status': 'Open Land',
     'p7.title':   'High-Rise Residential Tower',
     'p7.loc':     'Bahir Dar',
@@ -993,12 +1165,19 @@ const TRANSLATIONS = {
     'p7.status':  'Planned / Project',
     'p14.title':  'Koke Mixed Apartments',
     'p14.loc':    'Bahir Dar',
-    'p14.desc':   'A multi-building mixed-use project — commercial ground floor and high-rise residential units above.',
+    'p14.desc':   'A multi-building mixed-use project — commercial ground floor and high-rise residential units.',
     'p14.status': 'Planned / Project',
     'p12.title':  'Lakeside Residential Neighbourhood',
     'p12.loc':    'Bahir Dar, Lake Tana',
-    'p12.desc':   'An aerial view of a Bahir Dar residential neighbourhood, showing villas near Lake Tana.',
+    'p12.desc':   'An aerial view of a Bahir Dar residential neighbourhood near Lake Tana.',
     'p12.status': 'Area View',
+    'gal.photo':  'Photo',
+    'vid.1.title':'Property Video Tour 1',
+    'vid.2.title':'Property Video Tour 2',
+    'vid.3.title':'Property Video Tour 3',
+    'vid.4.title':'Property Video Tour 4',
+    'vid.5.title':'Property Video Tour 5',
+    'vid.sub':    'Bahir Dar · Maru Commission',
   }
 };
 
@@ -1020,7 +1199,7 @@ const PROPERTIES_DATA = [
 ];
 
 const SERVICES_DATA = [
-  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg>',  tkTitle:'svc.house.title', tkDesc:'svc.house.desc' },
+  { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>',  tkTitle:'svc.house.title', tkDesc:'svc.house.desc' },
   { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>', tkTitle:'svc.condo.title', tkDesc:'svc.condo.desc' },
   { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 4l9 5.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>', tkTitle:'svc.apt.title', tkDesc:'svc.apt.desc' },
   { icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/><path d="M3 8h18"/></svg>', tkTitle:'svc.land.title', tkDesc:'svc.land.desc' },
@@ -1044,38 +1223,26 @@ const statusClassMap = { ready:'status-ready', build:'status-build', plan:'statu
    4. LANGUAGE ENGINE
    ===================================================== */
 let currentLang = 'am';
-
-function t(key){
-  return TRANSLATIONS[currentLang][key] || TRANSLATIONS['am'][key] || key;
-}
+function t(key){ return TRANSLATIONS[currentLang][key] || TRANSLATIONS['am'][key] || key; }
 
 function applyTranslations(){
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const val = t(key);
+    const val = t(el.getAttribute('data-i18n'));
     if(val !== undefined) el.innerHTML = val;
   });
   document.documentElement.lang = currentLang === 'am' ? 'am' : 'en';
-  // Re-render dynamic sections
-  renderServices();
-  renderFilters();
-  renderProperties();
-  initFilters();
-  initLightbox();
+  renderServices(); renderFilters(); renderProperties();
+  renderGallery(); renderVideos();
+  initFilters(); initLightbox(); initGalleryLightbox();
 }
 
 function switchLang(lang){
   if(lang === currentLang) return;
   currentLang = lang;
-  const segAM = document.getElementById('segAM');
-  const segEN = document.getElementById('segEN');
-  segAM.classList.toggle('active', lang === 'am');
-  segEN.classList.toggle('active', lang === 'en');
+  document.getElementById('segAM').classList.toggle('active', lang === 'am');
+  document.getElementById('segEN').classList.toggle('active', lang === 'en');
   document.body.classList.add('lang-switching');
-  setTimeout(() => {
-    applyTranslations();
-    document.body.classList.remove('lang-switching');
-  }, 160);
+  setTimeout(() => { applyTranslations(); document.body.classList.remove('lang-switching'); }, 160);
 }
 
 /* =====================================================
@@ -1083,7 +1250,7 @@ function switchLang(lang){
    ===================================================== */
 function renderMarquee(){
   const items = SERVICES_DATA.map(s =>
-    `<div class="marquee-item">${s.icon.replace('viewBox','width="16" height="16" viewBox')}<span>${t(s.tkTitle)}</span></div>`
+    `<div class="marquee-item">${s.icon}<span>${t(s.tkTitle)}</span></div>`
   ).join('');
   document.getElementById('marqueeTrack').innerHTML = items + items;
 }
@@ -1096,22 +1263,19 @@ function renderServices(){
       <p>${t(s.tkDesc)}</p>
     </div>
   `).join('');
-  // re-observe new cards
   observeReveal();
 }
 
 function renderFilters(){
-  document.getElementById('filterBar').innerHTML = FILTERS_DATA.map((f,i) => `
-    <button class="filter-btn${i===0?' active':''}" data-filter="${f.key}">${t(f.tk)}</button>
-  `).join('');
+  document.getElementById('filterBar').innerHTML = FILTERS_DATA.map((f,i) =>
+    `<button class="filter-btn${i===0?' active':''}" data-filter="${f.key}">${t(f.tk)}</button>`
+  ).join('');
 }
 
 function renderProperties(){
   document.getElementById('propGrid').innerHTML = PROPERTIES_DATA.map(p => {
-    const title  = t(`p${p.key}.title`);
-    const loc    = t(`p${p.key}.loc`);
-    const desc   = t(`p${p.key}.desc`);
-    const status = t(`p${p.key}.status`);
+    const title = t(`p${p.key}.title`), loc = t(`p${p.key}.loc`),
+          desc  = t(`p${p.key}.desc`), status = t(`p${p.key}.status`);
     return `
       <div class="prop-card reveal" data-status="${p.status}" data-key="${p.key}">
         <div class="prop-img">
@@ -1123,8 +1287,7 @@ function renderProperties(){
           </span>
         </div>
         <div class="prop-body">
-          <h3>${title}</h3>
-          <p>${desc}</p>
+          <h3>${title}</h3><p>${desc}</p>
           <div class="prop-foot">
             <span class="prop-type">${p.type}</span>
             <div class="prop-arrow">
@@ -1132,9 +1295,37 @@ function renderProperties(){
             </div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
+  observeReveal();
+}
+
+function renderGallery(){
+  document.getElementById('galleryGrid').innerHTML = GALLERY_IMGS.map((src, i) => `
+    <div class="gallery-item reveal" data-src="${src}" data-index="${i}">
+      <img src="${src}" alt="${t('gal.photo')} ${i+1}" loading="lazy">
+      <div class="gal-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/>
+        </svg>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+function renderVideos(){
+  document.getElementById('videoGrid').innerHTML = VIDEOS.map(v => `
+    <div class="video-card reveal">
+      <video controls preload="metadata" playsinline>
+        <source src="${v.src}" type="video/mp4">
+      </video>
+      <div class="vid-body">
+        <div class="vid-title">${t(v.tkTitle)}</div>
+        <div class="vid-sub">${t(v.tkSub)}</div>
+      </div>
+    </div>
+  `).join('');
   observeReveal();
 }
 
@@ -1142,48 +1333,53 @@ function renderProperties(){
    6. INTERACTIONS
    ===================================================== */
 function initFilters(){
-  const btns = document.querySelectorAll('.filter-btn');
-  btns.forEach(btn => {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
       document.querySelectorAll('.prop-card').forEach(card => {
-        if(f === 'all' || card.dataset.status === f){
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
+        card.classList.toggle('hidden', f !== 'all' && card.dataset.status !== f);
       });
     });
   });
 }
 
 function initLightbox(){
-  const lb      = document.getElementById('lightbox');
-  const lbImg   = document.getElementById('lightboxImg');
-  const lbTitle = document.getElementById('lightboxTitle');
-  const lbDesc  = document.getElementById('lightboxDesc');
-
+  const lb = document.getElementById('lightbox'),
+        lbImg = document.getElementById('lightboxImg'),
+        lbTitle = document.getElementById('lightboxTitle'),
+        lbDesc  = document.getElementById('lightboxDesc');
   document.querySelectorAll('.prop-card').forEach(card => {
     card.addEventListener('click', () => {
       const key = card.dataset.key;
-      lbImg.src       = IMG[key] || '';
+      lbImg.src = IMG[key] || '';
       lbTitle.textContent = t(`p${key}.title`);
       lbDesc.textContent  = t(`p${key}.desc`);
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     });
   });
-
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   lb.addEventListener('click', e => { if(e.target === lb) closeLightbox(); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+  function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+}
 
-  function closeLightbox(){
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+function initGalleryLightbox(){
+  const lb = document.getElementById('lightbox'),
+        lbImg = document.getElementById('lightboxImg'),
+        lbTitle = document.getElementById('lightboxTitle'),
+        lbDesc  = document.getElementById('lightboxDesc');
+  document.querySelectorAll('.gallery-item').forEach((item, i) => {
+    item.addEventListener('click', () => {
+      lbImg.src = item.dataset.src;
+      lbTitle.textContent = `${t('gal.photo')} ${i + 1}`;
+      lbDesc.textContent  = 'ባህርዳር · Bahir Dar';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
 }
 
 function initDrawer(){
@@ -1199,81 +1395,100 @@ function initLangToggle(){
   });
 }
 
+/* =====================================================
+   7. BACKGROUND MUSIC FOR VIDEOS SECTION
+   - Plays automatically when #videos scrolls into view
+   - Pauses when the section scrolls out of view
+   - User can override with the toggle button at any time;
+     manual choice is respected until the section is left
+     and re-entered.
+   ===================================================== */
+function initSectionMusic(){
+  const section = document.getElementById('videos');
+  const audio   = document.getElementById('bgMusic');
+  const toggleBtn = document.getElementById('musicToggle');
+  if(!section || !audio || !toggleBtn) return;
+
+  const iconOn  = toggleBtn.querySelector('.ic-on');
+  const iconOff = toggleBtn.querySelector('.ic-off');
+  audio.volume = 0.55;
+
+  let userPaused = false; // true if the user explicitly paused while section is in view
+
+  function setButtonState(playing){
+    toggleBtn.classList.toggle('is-playing', playing);
+    toggleBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    iconOn.style.display  = playing ? 'block' : 'none';
+    iconOff.style.display = playing ? 'none'  : 'block';
+  }
+
+  function tryPlay(){
+    const p = audio.play();
+    if(p && typeof p.catch === 'function'){
+      p.then(() => setButtonState(true)).catch(() => {
+        // Autoplay blocked by browser policy — wait for user gesture
+        setButtonState(false);
+      });
+    } else {
+      setButtonState(true);
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && entry.intersectionRatio > 0.35){
+        if(!userPaused) tryPlay();
+      } else {
+        audio.pause();
+        setButtonState(false);
+        userPaused = false; // reset so re-entering the section autoplays again
+      }
+    });
+  }, { threshold: [0, 0.35, 0.6] });
+
+  observer.observe(section);
+
+  toggleBtn.addEventListener('click', () => {
+    if(audio.paused){
+      userPaused = false;
+      tryPlay();
+    } else {
+      audio.pause();
+      setButtonState(false);
+      userPaused = true;
+    }
+  });
+}
+
 let revealObserver;
 function observeReveal(){
   if(!revealObserver){
-    revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.10 });
+    revealObserver = new IntersectionObserver(
+      entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }),
+      { threshold: 0.10 }
+    );
   }
   document.querySelectorAll('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
 }
 
 /* =====================================================
-   7. BOOT
+   8. BOOT
    ===================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   renderMarquee();
   renderServices();
   renderFilters();
   renderProperties();
+  renderGallery();
+  renderVideos();
   initFilters();
   initLightbox();
+  initGalleryLightbox();
   initDrawer();
   initLangToggle();
+  initSectionMusic();
   observeReveal();
 });
 </script>
-<footer class="site-footer">
-  <div class="footer-content">
-
-    <!-- Logo Section -->
-    <div class="footer-logo">
-      <img src="static/img/logo.jpg" alt="STEWS PLC Logo" style="width:300px; height:auto;">
-    </div>
-
-    <!-- Creator Section -->
-    <div class="creator-info">
-      <h3>Website Developed By</h3>
-
-      <h2>SMART TECH SOFTWARE ENGINEERING WORKS AND SERVICE PLC (STEWS PLC)</h2>
-
-      <p><strong>Dr. Asmamaw Chanie (Ph.D)</strong></p>
-      <p>Full Stack Software Engineer</p>
-      <p>Assistant Professor at Bahir Dar University (BDU)</p>
-
-      <p>
-        ✉️ Email:
-        <a href="mailto:chanieasmamaw@yahoo.com">
-          chanieasmamaw@yahoo.com
-        </a>
-      </p>
-
-      <p>
-        🔗 LinkedIn:
-        <a href="https://linkedin.com/in/asmamaw-chanie-yehun" target="_blank">
-          linkedin.com/in/asmamaw-chanie-yehun
-        </a>
-      </p>
-
-      <p>
-        📞 Phone:
-        <a href="tel:+251975882230">
-          +251 975 882 230
-        </a>
-      </p>
-
-      <p>
-        📍 Bahir Dar City, Amhara Region, Ethiopia
-      </p>
-    </div>
-
-    <!-- Copyright -->
-    <div class="copyright">
-
-    </div>
-
-  </div>
-</footer>
 </body>
 </html>
